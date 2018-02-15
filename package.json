@@ -1,0 +1,21 @@
+{
+  "name": "Telegram",
+  "version": "1.0.0",
+  "description": "Simple electron app for test",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Sergei Voronov",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "popmotion": "^8.1.10",
+    "telegram-api-js": "^1.2.9",
+    "watchr": "^4.0.1"
+  },
+  "devDependencies": {
+    "electron": "^1.8.2"
+  }
+}

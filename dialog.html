@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="photon.min.css">
+    <link rel="stylesheet" href="photon.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="telegramApi.js"></script>
+    <script src="telegram.js"></script>
+    <script>if (window.module) module = window.module;</script>
+</head>
+<body>
+        <div class="window">
+      <div class="window-content" id="content">
+            <form>
+                    <div class="form-group" id="form">
+                      <input type="email" class="form-control" placeholder="Phone Number" id="number">
+                      <input type="email" class="form-control" placeholder="Paste Code" id="code">
+                      <button onclick="SendCode()" class="form-control" id="send">Send Code</button>
+                    </div>
+            </form>
+          </div>
+          <footer class="toolbar toolbar-footer">
+            <div class="toolbar-actions">
+              <button class="btn btn-default fbuttons">
+                Quit
+              </button>
+          
+              <button class="btn btn-default pull-right fbuttons" onclick="SingIn()">
+                Log In
+              </button>
+            </div>
+          </footer>
+          </div>
+</body>
+<style>
+
+    #content {
+
+      background-color: #ff8888;
+    }
+    .form-group {
+
+        width: 300px;
+        position:absolute; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+        top: 50%;
+    }
+
+    .form-control {
+
+        margin-top: 5px;
+    }
+
+    .toolbar-footer{
+
+      background: rgb(240, 240, 240);
+    }
+
+    #send:hover{
+
+      background: rgb(240, 240, 240);
+    }
+
+    .fbuttons {
+
+      background: #ffffff; 
+    }
+
+    .fbuttons:hover {
+
+      background: rgb(240, 240, 240);
+    }
+</style>
+<script src="loganim.js"></script>
+</html>
