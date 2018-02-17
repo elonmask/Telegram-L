@@ -42,25 +42,12 @@ function SendCode() {
 
 function SingIn() {
 
-  var number = document.getElementById('number')
-  
-  telegramApi.signIn(number.value, window.phone_code_hash, document.getElementById('code').value).then(function() {
-    // Sign in complete
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://localhost:8080/send/?code=" + document.getElementById('code').value + '&' + "hash=" + window.phone_code_hash + '&' + "number=" + document.getElementById('number').value, true);
+  xhttp.send();
     delete window.phone_code_hash;
-    obj.data.isLogged = 'yes'
-    download(JSON.stringify(obj), 'conf', 'application/JSON')
+    //download(JSON.stringify(obj), 'conf.json', 'application/JSON')
     console.log('Signed In')
-
-}, function(err) {
-    switch (err.type) {
-        case 'PHONE_CODE_INVALID':
-               console.log('Invalid Code')
-            break;
-        case 'PHONE_NUMBER_UNOCCUPIED':
-               console.log('Unoccupied number')
-            break;
-    }
-});
 }
 
 function getUser() {
@@ -87,10 +74,13 @@ function getPhoto() {
 var obj = {
 
   data: {
-      isLogged: null
+      isLogged: null,
+      code: null,
+      number: null,
+      code_hash: null
   }
 }
-
+/*
 function download(data, filename, type) {
   var file = new Blob([data], {type: type});
   if (window.navigator.msSaveBlob) // IE10+
@@ -108,3 +98,9 @@ function download(data, filename, type) {
       }, 0); 
   }
 }
+*/
+/*
+function loadJSON() {   
+    document.getElementById('lorem').value = JSON.parse(conf)[0].code
+ }
+ */

@@ -1,10 +1,16 @@
 const {app, BrowserWindow} = require('electron') 
 const url = require('url') 
 const path = require('path')  
-const watchr = require('watchr')
+const express = require('express')
 
-let win  
-//var path = process.cwd()
+var server = express()
+
+let win
+var conf
+
+var code
+var hash
+var number
 
 function createWindow() { 
    win = new BrowserWindow({width: 800, height: 600}) 
@@ -22,33 +28,31 @@ function createWindow() {
     protocol: 'file:', 
     slashes: true 
  })) 
- 
-} 
-/*
-function listener (changeType, fullPath, currentStat, previousStat) {
-	switch ( changeType ) {
-		case 'update':
-			console.log('the file', fullPath, 'was updated', currentStat, previousStat)
-			break
-		case 'create':
-			console.log('the file', fullPath, 'was created', currentStat)
-			break
-		case 'delete':
-			console.log('the file', fullPath, 'was deleted', previousStat)
-			break
-	}
-}
-*/
-/*
-function next (err) {
-	if ( err )  return console.log('watch failed on', path, 'with error', err)
-	console.log('watch successful on', path)
-}
 
-// Watch the path with the change listener and completion callback
-var stalker = watchr.open(path, listener, next)
+server.get('/send', function(req, res) {
 
-// Close the stalker of the watcher
-stalker.close()
-*/
+    code = req.query.code
+    hash = req.query.hash
+    number = req.query.number
+
+    win.loadURL(url.format ({ 
+        pathname: path.join(__dirname, 'index.html'), 
+        protocol: 'file:', 
+        slashes: true 
+     }))
+})
+
+server.get('/get', function(req, res) {
+
+    res.send(code + '&' + hash + '&' + number)
+})
+
+server.get('/test', function(req, res) {
+
+    res.send('Working...')
+})
+
+server.listen('8080', function(){})
+
+}
 app.on('ready', createWindow)

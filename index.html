@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="telegramApi.js"></script>
     <script src="telegram.js"></script>
+    <script type="text/javascript" src="conf.json"></script>
     <script>import { tween } from 'popmotion';</script>
     <script>if (window.module) module = window.module;</script>
   </head>
@@ -32,7 +33,7 @@
     <img class="img-circle media-object pull-left" src="avatar.png" width="32" height="32">
     <div class="media-body">
       <strong>Nickname</strong>
-      <p>Lorem ipsum dolor sit amet.</p>
+      <p id="lorem">Lorem ipsum dolor sit amet.</p>
     </div>
   </li>
 </ul>
@@ -46,7 +47,10 @@
           Cancel
         </button>
     
-        <button class="btn btn-primary pull-right">
+        <button class="btn btn-primary pull-right" onclick="loadJSON(function (response) {
+            var actual_JSON = JSON.parse(response);
+            document.getElementById('lorem').value = actual_JSON
+         })">
           Save
         </button>
       </div>
