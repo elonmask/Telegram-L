@@ -14,12 +14,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="telegramApi.js"></script>
     <script src="telegram.js"></script>
-    <script type="text/javascript" src="conf.json"></script>
     <script>import { tween } from 'popmotion';</script>
     <script>if (window.module) module = window.module;</script>
   </head>
 
-  
+
   <body>
     <div class="window">
   <div class="window-content">
@@ -30,7 +29,7 @@
     <input class="form-control" type="text" placeholder="Search for someone">
   </li>
   <li class="list-group-item">
-    <img class="img-circle media-object pull-left" src="avatar.png" width="32" height="32">
+    <img class="img-circle media-object pull-left" src="avatar.png" width="32" height="32" id="avatar">
     <div class="media-body">
       <strong>Nickname</strong>
       <p id="lorem">Lorem ipsum dolor sit amet.</p>
@@ -46,11 +45,8 @@
         <button class="btn btn-default">
           Cancel
         </button>
-    
-        <button class="btn btn-primary pull-right" onclick="loadJSON(function (response) {
-            var actual_JSON = JSON.parse(response);
-            document.getElementById('lorem').value = actual_JSON
-         })">
+
+        <button class="btn btn-primary pull-right" onclick="LogIn()">
           Save
         </button>
       </div>

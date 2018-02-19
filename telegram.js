@@ -24,6 +24,7 @@ telegramApi.setConfig({
 
 var authCode
 var hash
+var responseData
 
 function SendCode() {
 
@@ -43,11 +44,47 @@ function SendCode() {
 function SingIn() {
 
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:8080/send/?code=" + document.getElementById('code').value + '&' + "hash=" + window.phone_code_hash + '&' + "number=" + document.getElementById('number').value, true);
+  xhttp.open("GET", "http://localhost:8080/send/?code=" + document.getElementById('code').value + '&' + "hash=" + window.phone_code_hash + '&' + "number=" + '+' + document.getElementById('number').value, true);
   xhttp.send();
-    delete window.phone_code_hash;
     //download(JSON.stringify(obj), 'conf.json', 'application/JSON')
-    console.log('Signed In')
+    //console.log('Signed In')
+}
+
+function LogIn() {
+
+  var number;
+  var hash;
+  var code;
+
+Request('http://localhost:8080/getnumber', number);
+Request('http://localhost:8080/gethash', hash);
+Request('http://localhost:8080/getcode', code
+
+window.phone_code_hash = hash;
+
+  telegramApi.signIn(number, hash, code).then(function() {
+    delete window.phone_code_hash;
+    getPhoto();
+}, function(err) {
+    switch (err.type) {
+        case 'PHONE_CODE_INVALID':
+            // alert "Phone code invalid"
+            break;
+        case 'PHONE_NUMBER_UNOCCUPIED':
+            // User not registered, you should use signUp method
+            break;
+    }
+});
+
+}
+
+function Request(url, param) {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();
+  param = xhttp.responseText;
+  console.log('Data: ' + param);
 }
 
 function getUser() {
@@ -67,7 +104,7 @@ function getUser() {
 
 function getPhoto() {
   telegramApi.getUserPhoto('base64', 'small').then(function(base64) {
-    //document.getElementById('avatar').src = base64
+    document.getElementById('avatar').src = base64
 });
 }
 
@@ -94,13 +131,13 @@ function download(data, filename, type) {
       a.click();
       setTimeout(function() {
           document.body.removeChild(a);
-          window.URL.revokeObjectURL(url);  
-      }, 0); 
+          window.URL.revokeObjectURL(url);
+      }, 0);
   }
 }
 */
 /*
-function loadJSON() {   
+function loadJSON() {
     document.getElementById('lorem').value = JSON.parse(conf)[0].code
  }
  */
