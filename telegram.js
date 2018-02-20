@@ -56,13 +56,13 @@ function LogIn() {
   var hash;
   var code;
 
-Request('http://localhost:8080/getnumber', number);
+RequestPhone('http://localhost:8080/getnumber', number);
 Request('http://localhost:8080/gethash', hash);
-Request('http://localhost:8080/getcode', code
+Request('http://localhost:8080/getcode', code);
 
-window.phone_code_hash = hash;
+  window.phone_code_hash = hash;
 
-  telegramApi.signIn(number, hash, code).then(function() {
+  telegramApi.signIn(number, window.phone_code_hash, code).then(function() {
     delete window.phone_code_hash;
     getPhoto();
 }, function(err) {
@@ -84,6 +84,16 @@ function Request(url, param) {
   xhttp.open("GET", url, false);
   xhttp.send();
   param = xhttp.responseText;
+  console.log('Data: ' + param);
+}
+
+function RequestPhone(url, param) {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();
+  var temp = "+" + xhttp.responseText;
+  param = temp.replace(/\s/g,'');
   console.log('Data: ' + param);
 }
 
