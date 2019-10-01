@@ -8,14 +8,14 @@ telegramApi.setConfig({
     test: [
       {
         id: 1,
-        host: '149.154.167.40',
+        host: '1.2.3.4.5.6',
         port: 443
       }
     ],
     production: [
       {
         id: 2, /* DC ID */
-        host: '149.154.167.50',
+        host: '7.8.9.10.11.12',
         port: 443
       }
     ]
