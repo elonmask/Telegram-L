@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "electron-packager": "^11.0.1",
-    "express": "^4.16.2",
+    "express": "^4.18.2",
     "jquery": "^3.3.1",
     "popmotion": "^8.1.10",
     "telegram-api-js": "^1.2.9",
